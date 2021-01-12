@@ -1,0 +1,12 @@
+import * as actionTypes from "./ActionTypes";
+
+
+export const userReducer = (state = {users: []}, action) => {
+    switch(action.type){
+      case actionTypes.FETCH_USERS:
+        return {...state, users: action.payload}
+      default:
+        return state;
+    }
+  }
+

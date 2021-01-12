@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { fetchPosts } from "../redux/actionCreator";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-const mapStateToProps = state => ({
-  posts: state.posts
+const mapStateToProps = (state) => ({
+  posts: state.posts,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchPosts: () => dispatch(fetchPosts())
+const mapDispatchToProps = (dispatch) => ({
+  fetchPosts: () => dispatch(fetchPosts()),
 });
 
 class Posts extends Component {
@@ -20,8 +21,8 @@ class Posts extends Component {
       <div>
         Posts fetched form API:
         <ul>
-          {this.props.posts.map((item, index) => (
-            <li key={index}>{item.title}</li>
+          {this.props.posts.posts.map((post, index) => (
+            <li key={index}>{post.title}</li>
           ))}
         </ul>
       </div>
@@ -29,4 +30,4 @@ class Posts extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts));
