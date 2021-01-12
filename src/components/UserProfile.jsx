@@ -1,14 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
+import { fetchUsers } from "../redux/actionCreator";
+import { connect } from "react-redux";
 
-function UserProfile({ match, users }) {
-  const user = users.filter(
-    (user) => user.id === parseInt(match.params.id, 10)
-  )[0];
-  return (
-    <div>
-      <h2>{user.name}</h2>
-    </div>
-  );
+const mapStateToProps = (state) => ({
+  users: state.users,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUsers: () => dispatch(fetchUsers()),
+});
+
+class UserProfile extends Component {
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+  render() {
+    const user = this.props.users.users.filter(
+      (user) => (user.id = parseInt(this.props.match.params.id, 10))
+    )[0];
+    return (
+      <div>
+        <h2>{user.id}</h2>
+        <h4>{user.name}</h4>
+      </div>
+    );
+  }
 }
 
-export default UserProfile;
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

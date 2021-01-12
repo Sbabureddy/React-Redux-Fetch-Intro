@@ -36,13 +36,9 @@ function App() {
         </div>
         <Switch>
           <Route path="/posts" component={MainComponent} />
-          <Route path="/posts/:id" render={(props) => {
-            <PostDescription {...props} posts={posts} />
-          }} />
+          <Route path="/posts/:id" component={PostDescription} />
           <Route path="/users" exact component={UsersComponent} />
-          <Route path="/users/:id" render={(props) => {
-            <UserProfile {...props} users={users} />
-          }} />
+          <Route path="/users/:id" render={(props) => <UserProfile {...props} />} />
         </Switch>
       </BrowserRouter>
     </Provider>
